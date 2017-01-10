@@ -196,11 +196,17 @@ module.exports = postcss.plugin("postcss-custom-properties", function(options) {
         var prop = decl.prop
         if (prop && prop.indexOf(VAR_PROP_IDENTIFIER) === 0) {
           if (!map[prop] || !importantMap[prop] || decl.important) {
+            var value = decl.value
+            var resolved = false
+            if (map[prop]) {
+              value = resolveValue(value, map, result)
+              resolved = true
+            }
             map[prop] = {
-              value: decl.value,
+              value: value,
               deps: [],
               circular: false,
-              resolved: false,
+              resolved: resolved,
             }
             importantMap[prop] = decl.important
           }

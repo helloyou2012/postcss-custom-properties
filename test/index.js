@@ -205,6 +205,7 @@ test("circular variable references", function(t) {
 test("circular variable references with fallback", function(t) {
   compareFixtures(t, "self-reference-fallback")
   compareFixtures(t, "self-reference-double-fallback")
+  compareFixtures(t, "self-reference-self-fallback")
   t.end()
 })
 
